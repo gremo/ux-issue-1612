@@ -1,0 +1,34 @@
+services:
+    caddy:
+        image: ${IMAGE_PREFIX:-}${COMPOSE_PROJECT_NAME}-caddy-dev
+        build:
+            target: caddy-dev
+        volumes:
+            - public_bundles:/srv/public/bundles
+            - public_media:/srv/public/media
+            - public_uploads:/srv/public/uploads
+            - ./config/docker/Caddyfile:/etc/caddy/Caddyfile:ro
+            - ./public/:/srv/public:ro
+
+    php:
+        image: ${IMAGE_PREFIX:-}${COMPOSE_PROJECT_NAME}-php-dev
+        build:
+            target: php-dev
+        volumes:
+            - node_modules:/var/www/html/node_modules
+            - public_bundles:/var/www/html/public/bundles
+            - public_media:/var/www/html/public/media
+            - public_uploads:/var/www/html/public/uploads
+            - var:/var/www/html/var
+            - vendor:/var/www/html/vendor
+            - ./config/docker/php-fpm.conf:/usr/local/etc/php-fpm.d/zzz-app.conf:ro
+            - ./config/docker/php.ini:/usr/local/etc/php/conf.d/zz-app.ini:ro
+            - ./.:/var/www/html
+
+volumes:
+    node_modules:
+    public_bundles:
+    public_media:
+    public_uploads:
+    var:
+    vendor:

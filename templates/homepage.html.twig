@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>GitHub issue <a href="https://github.com/symfony/ux/issues/1612" target="_blank">#1612</a></h1>
+    <ul>
+        <li>
+            <a href="{{ path("working") }}">Working example</a>
+        </li>
+        <li>
+            <a href="{{ path("not_working") }}">Not working example (bug)</a>
+        </li>
+    </ul>
+{% endblock %}

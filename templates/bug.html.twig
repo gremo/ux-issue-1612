@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <twig:AppContext>
+        {% if not address %}
+            <twig:Foo {{ ...stimulus_controller('foo') }} />
+
+            <button data-action="live#action" data-live-action-param="setAddress">
+                call setAddress()
+            </button>
+        {% else %}
+            <twig:Bar />
+
+            <button data-action="live#action" data-live-action-param="unsetAddress">
+                call unsetAddress()
+            </button>
+        {% endif %}
+    </twig:AppContext>
+{% endblock %}
